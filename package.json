@@ -1,0 +1,15 @@
+{
+  "name": "cordova-plugin-kotlin-align",
+  "version": "1.0.1",
+  "description": "Align Kotlin deps and replace jdk7/jdk8 with stdlib to avoid duplicate classes in Cordova/Android builds.",
+  "license": "Apache-2.0",
+  "keywords": ["cordova", "android", "kotlin", "gradle"],
+  "cordova": {
+    "id": "cordova-plugin-kotlin-align",
+    "platforms": ["android"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Chacabuk/cordova-plugin-kotlin-align.git"
+  }
+}
