@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-kotlin-align" version="1.0.0"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0">
+  <name>kotlin align (avoid jdk7/jdk8 duplicates)</name>
+  <description>Aligns all org.jetbrains.kotlin dependencies to a single version and replaces kotlin-stdlib-jdk7/8 with kotlin-stdlib to avoid duplicate classes.</description>
+  <license>Apache-2.0</license>
+  <keywords>cordova, android, kotlin, gradle, duplicates</keywords>
+
+  <platform name="android">
+    <framework src="src/android/kotlin-align.gradle"
+               custom="true" type="gradleReference" />
+  </platform>
+</plugin>

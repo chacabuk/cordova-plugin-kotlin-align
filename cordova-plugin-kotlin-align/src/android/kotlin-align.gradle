@@ -1,0 +1,28 @@
+// cordova-plugin-kotlin-align: aligns Kotlin dependencies and removes jdk7/jdk8 stdlib artifacts
+// Drop this file via <framework type="gradleReference"> in a Cordova/Capacitor project.
+// It will be applied to the app module.
+def KOTLIN_VER = project.hasProperty("KOTLIN_VER") ? project.property("KOTLIN_VER") : "1.8.22"
+
+logger.lifecycle("[kotlin-align] Forcing Kotlin version = " + KOTLIN_VER)
+
+configurations.all { cfg ->
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == "org.jetbrains.kotlin") {
+            if (details.requested.name == "kotlin-stdlib-jdk7"
+             || details.requested.name == "kotlin-stdlib-jdk8") {
+                details.useTarget("org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VER}")
+            } else {
+                details.useVersion KOTLIN_VER
+            }
+            details.because("cordova-plugin-kotlin-align: avoid duplicate classes by unifying Kotlin deps")
+        }
+    }
+    // Also exclude legacy stdlib variants if any dependency pulls them
+    exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk7"
+    exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk8"
+}
+
+// Ensure stdlib is present explicitly at the chosen version (harmless if already present)
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN_VER}"
+}
